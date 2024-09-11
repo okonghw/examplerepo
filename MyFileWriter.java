@@ -9,6 +9,17 @@ public class MyFileWriter {
         File file = new File (fileName);
         System.out.println ("File Size of " + fileName + ": " + file.length());
     }
+
+    public static void printTotalFileSize (String... files){
+        long totalSize = 0;
+        for (String fileName : files){
+            File file = new File(fileName);
+            if (file.exists())
+                totalSize += file.length;
+        }
+        System.out.println ("Total size of all files: " + totalSize + " bytes");
+    }
+
     public static void main(String[] args) {
 
         printFileSize("README.md");
