@@ -15,13 +15,33 @@ public class MyFileWriter {
         for (String fileName : files){
             File file = new File(fileName);
             if (file.exists())
-                totalSize += file.length;
+                totalSize += file.length();
         }
         System.out.println ("Total size of all files: " + totalSize + " bytes");
     }
 
     public static void main(String[] args) {
-
+        //file1
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("file1.txt"))) {
+            bufferedWriter.write("Here's");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //file2
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("directory1/file2.txt"))) {
+            bufferedWriter.write("Some");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //file3
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(".hiddenDirectory/file3.txt"))) {
+            bufferedWriter.write("Text");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        printTotalFileSize("file1.txt", "directory1/file2.txt", ".hiddenDirectory/file3.txt");
+        
         printFileSize("README.md");
 
         // BufferedWriter writer = new BufferedWriter("C:\\Users\\oliviakong\\Desktop\\everything basically\\honors topics in cs 2024\\examplerepo");
